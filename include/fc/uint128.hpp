@@ -32,16 +32,20 @@ namespace fc
       uint128( uint64_t _h, uint64_t _l )
       :hi(_h),lo(_l){}
       uint128( const fc::bigint& bi );
+#ifdef __SIZEOF_INT128__
       explicit uint128( unsigned __int128 i ):hi( i >> 64 ), lo(i){ }
+#endif
 
       operator std::string()const;
       operator fc::bigint()const;
 
+#ifdef __SIZEOF_INT128__
       explicit operator unsigned __int128()const {
          unsigned __int128 result(hi);
          result <<= 64;
          return result | lo;
       }
+#endif
 
       bool     operator == ( const uint128& o )const{ return hi == o.hi && lo == o.lo;             }
       bool     operator != ( const uint128& o )const{ return hi != o.hi || lo != o.lo;             }

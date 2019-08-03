@@ -626,6 +626,7 @@ void from_variant( const variant& var,  int32_t& vo )
    vo = static_cast<int32_t>(var.as_int64());
 }
 
+#ifdef __SIZEOF_INT128__
 void to_variant( const unsigned __int128& var,  variant& vo )  {
    /*
    if( var <= static_cast<unsigned __int128>( std::numeric_limits<uint32_t>::max() ) )
@@ -690,6 +691,7 @@ void from_variant( const variant& var,  __int128& vo )
       FC_THROW_EXCEPTION( bad_cast_exception, "Cannot convert variant of type '${type}' into a int128_t", ("type", var.get_type()) );
    }
 }
+#endif // __SIZEOF_INT128__
 
 void from_variant( const variant& var,  int64_t& vo )
 {

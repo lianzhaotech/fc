@@ -91,6 +91,7 @@ class datastream<size_t> {
      size_t _size;
 };
 
+#ifdef __SIZEOF_INT128__
 template<typename ST>
 inline datastream<ST>& operator<<(datastream<ST>& ds, const __int128& d) {
   ds.write( (const char*)&d, sizeof(d) );
@@ -114,6 +115,7 @@ inline datastream<ST>& operator>>(datastream<ST>& ds, unsigned __int128& d) {
   ds.read((char*)&d, sizeof(d) );
   return ds;
 }
+#endif // __SIZEOF_INT128__
 
 template<typename ST>
 inline datastream<ST>& operator<<(datastream<ST>& ds, const int64_t& d) {
